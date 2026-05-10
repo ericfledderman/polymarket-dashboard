@@ -8,6 +8,8 @@
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 ![CI](https://github.com/ericfledderman/polymarket-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)
 
+**[Live Demo](https://polymarket-dashboard-psi-orpin.vercel.app/)**
+
 ---
 
 ## Screenshots
