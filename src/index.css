@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  /* Syne: body UI; Outfit: product name + major section titles */
+  --font-sans: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+}
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #1a1a24;
+  --border: #2a2a38;
+  --text: #e8e8f0;
+  /* Secondary copy: a touch larger steps in components; base is brighter vs bg */
+  --muted: #9595ae;
+  --yes: #22c55e;
+  --yes-dim: rgba(34, 197, 94, 0.12);
+  --no: #ef4444;
+  --no-dim: rgba(239, 68, 68, 0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129, 140, 248, 0.12);
+}
+
+/*
+ * Tailwind preflight already normalizes margins; a universal padding reset
+ * fights form controls and nested layout. Keep box-sizing only.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans, 'Syne', ui-sans-serif, system-ui, sans-serif);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'DM Mono', monospace; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track { animation: ticker 40s linear infinite; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.live-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--yes);
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+.market-card { transition: border-color 0.2s, transform 0.2s; }
+.market-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.4s ease forwards;
+  animation-delay: var(--fade-delay, 0ms);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-shimmer {
+  /* Avoid color-mix() for broader browser support */
+  background: linear-gradient(
+    90deg,
+    var(--surface2) 0%,
+    #252532 45%,
+    var(--surface2) 90%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
